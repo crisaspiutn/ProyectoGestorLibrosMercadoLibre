@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="description" content="pagina de gestion de publicaciones de mercado libre">
+    <meta charset="keywords" content="pagina web, gestion de publicaciones, mercado libre">
+    <title>gestor de publicaciones online</title>
+    <link rel="stylesheet" href="css/css.css">
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif;}
+        a{
+        background-color: black; color: white; text-decoration: none; border-radius: 10px; padding: 5px 10px; font-size: 18px;
+        }</style>
+</head>
+<body>
+    <header>
+        <span>{{titulo}}</span>
+        <div>
+            <a href="/regis">registrarse</a>
+            <a id="btn_iniciar">loguear</a>
+        </div>
+    </header>
+    <h1>gestion</h1>
+    <section id="vista_registro">
+        <fieldset>
+            <legend>zona de inicio de sesion</legend>
+            <form id="formulario" action="/regis" method="post">
+            <p><label for="nombre">nombre de usuario</label><input type="text" id="nombre" placeholder="nombre de usuario"></p>
+            <p><label for="clave">contraseña</label><input type="text" id="clave" placeholder="ingresa la clave"></p>
+            {{!-- <button id="registrar">registrar</button> --}}
+            <input type="submit" value="iniciar sesion"> <span id="msj_inicio_sesion"></span>
+            </form>
+        </fieldset>
+    </section>
+    <script src="js/js.js"></script>
+</body>
+</html>

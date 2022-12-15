@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="description" content="pagina de gestion de publicaciones de mercado libre">
+    <meta charset="keywords" content="pagina web, gestion de publicaciones, mercado libre">
+    <title>gestor de publicaciones online</title>
+    <style>a{
+        background-color: black; color: white; text-decoration: none; border-radius: 10px; padding: 5px 10px;
+        }</style>
+</head>
+<body>
+    <span></span>
+    <h1>registrate</h1>
+    <fieldset>
+    <legend>zona de registro</legend>
+    <form id="formulario" action="/regis" method="post">
+    <p><label for="nombre">nombre de usuario</label><input type="text" id="nombre" name="usuario" placeholder="nombre de usuario"></p>
+    <p><label for="clave">contraseña</label><input type="text" id="clave" name="clave" placeholder="ingresa la clave"></p>
+    {{!-- <button id="registrar">registrar</button> --}}
+    <input type="submit" value="registrar">
+    <h3>{{mensaje}} {{#if estado}}<a href="/">iniciar sesion</a>{{else}}{{/if}}</h3>
+    </form>
+    </fieldset>
+    {{!-- <script src="js/js.js"></script> --}}
+</body>
+</html>

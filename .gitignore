@@ -1,0 +1,14 @@
+node_modules
+.env
+.vscode
+desarrollo.env
+produccion.env
+/src/files/*
+resolucion de bugs.txt
+.dockerignore
+script_sql_gestor_online_ml.sql
+/src/mercado/lista_dic_publicado.json
+/src/mercado/sin_repetidos.json
+
+/node_modules/
+/.vscode/

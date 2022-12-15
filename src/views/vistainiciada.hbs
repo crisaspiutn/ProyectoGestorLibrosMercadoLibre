@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="description" content="pagina de gestion de publicaciones de mercado libre">
+    <meta charset="keywords" content="pagina web, gestion de publicaciones, mercado libre">
+    <title>gestor de publicaciones online</title>
+    <link rel="stylesheet" href="css/css.css">
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif;}
+    </style>
+</head>
+<body>
+    <header>
+        <span>{{titulo}}</span>
+        <div>
+            <a href="/regis">registrarse</a>
+            <a id="btn_iniciar">loguear</a>
+            <a id="btn_salir">salir</a>
+        </div>
+    </header>
+    <section id="vista_registro" style="display: none;">
+        <fieldset>
+            <legend>zona de inicio de sesion</legend>
+            <form id="formulario" action="/regis" method="post">
+            <p><label for="nombre">nombre de usuario</label><input type="text" id="nombre" placeholder="nombre de usuario"></p>
+            <p><label for="clave">contraseña</label><input type="text" id="clave" placeholder="ingresa la clave"></p>
+            {{!-- <button id="registrar">registrar</button> --}}
+            <input type="submit" value="iniciar sesion">
+            </form>
+        </fieldset>
+    </section>
+    <section>
+        <h1>gestion</h1>
+        {{#if con_credencial_agregada}}
+        <fieldset id="credencial_activada" style="background-color: red; color:white;">
+            <form action="/addcredencial" id="formcredencial">
+                <p>
+                    <label>ingrese archivo con credencial</label>
+                        {{!-- <label>archivo con credencial</label> --}}
+                    <input type="file" name="file" id="file" accept=".json">
+                </p>
+                <button>enviar</button>
+            </form>
+        </fieldset>{{/if}}
+        <fieldset id="lista_archivos">
+            <legend>excels cargados</legend>
+            {{#each lista_archivos}}
+            <article class="card">
+                <div>
+                <p><strong class="card-titulo">Titulo asignado:</strong> <span>{{this.nameasign}}</span></p>
+                <p>
+                    <strong class="card-titulo">Nombre del archivo:</strong>
+                    <a href="file/?{{this.namefile}}" download="{{this.namefile}}">{{this.namefile}}</a>
+                </p>
+                </div>
+                {{!-- <span>{{this.usuario}}</span> --}}
+                <button>une excel con BD</button>
+                <button>eliminar</button>
+            </article>
+
+            {{/each}}
+        </fieldset>
+        <fieldset>
+            <legend>subir archivo excel</legend>
+            <form action="/file" method="post" enctype="multipart/form-data">
+            <p>
+                <label for="archivo">buscar tu archivo</label>
+                <input type="file" name="de-h-a-nod" id="archivo">
+            </p>
+            <p>
+                <label for="">asigna un nombre si quieres</label>
+                <input type="text" name="archivo">
+            </p>
+            <p>
+                <input type="submit" value="enviar">
+            </p>
+            </form>
+        </fieldset>
+        <fieldset >
+            <legend>progresos y detalles</legend>
+            <button id="btn_publicar">sincroniza mercado libre con base de datos</button>
+            <p><strong>contar diferencias entre excel y base de datos: </strong> <span id="contar_diferencias_entre_excel_y_base_de_datos">{{contar_diferencias_entre_excel_y_base_de_datos}}</span></p>
+            <p><strong>ya publicados desde la base de datos: </strong> <span id="contar_existentes">{{contar_existentes}}</span></p>
+            <p><strong>cantidad de items que no estan publicadas: </strong> <span id="contar_que_no_existen">{{contar_que_no_existen}}</span></p>
+            <p><strong>necesariamente actualizados: </strong> <span id="contar_actualizados">{{contar_actualizados}}</span></p>
+            <p><strong>publicados exitosamente: </strong> <span id="publicados_correctamente">{{publicados_correctamente}}</span></p>
+            <div class="cont-carga">
+                <div class="carga" id="carga"><span id="textcarga"></span>%</div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Lista de los que no se pudieron modificar</legend>
+            <div id="tabla_no_modificables"></div>
+        </fieldset>
+        <div id="btn_menus">
+            
+            <button id="btn_todos">mostrar publicaciones en mercado libre</button>
+            <button id="btn_extraidos_de_bd">mostrar publicaciones de base de datos</button>
+            {{!-- <button>incompletos</button>
+            <button>activos</button>
+            <button>pausados</button> --}}
+        </div>
+        <div>
+            <h3>seleccion segun opciones</h3>
+            <label for="">filtrar por stock</label>
+            <input type="checkbox" name="" id="">
+            <input type="number" style="width: 40px;" min="0" name="" value="0" id=""> entre y 
+            <input type="number" style="width: 40px;" min="0" name="" value="3" id="">
+        </div>
+        <hr>
+        {{!-- <fieldset> --}}
+            <legend>prepara items y completa datos para su publicacion</legend>
+            <h3 id="mensaje_titulo"></h3>
+            <div id="mensaje_auditorio"></div>
+            <div id="botones_auditorio"></div>
+            <div id="auditorio"></div>
+        {{!-- </fieldset> --}}
+        
+    </section>
+    <script src="js/js.js"></script>
+    <script src="js/excels.js"></script>
+    <script>
+        const btn_salir=document.getElementById("btn_salir");
+        btn_salir.addEventListener("click",function(){
+            localStorage.clear();
+            window.location.assign(window.location.origin);
+        })
+    </script>
+    {{#if con_credencial_agregada}}
+    <script src="js/credencial.js"></script>
+    {{/if}}
+    <script src="js/barracarga.js"></script>
+    <script src="js/frontNoModificable.js"></script>
+</body>
+</html>
